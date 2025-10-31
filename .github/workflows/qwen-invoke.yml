@@ -54,10 +54,10 @@ jobs:
           ADDITIONAL_CONTEXT: '${{ inputs.additional_context }}'
         with:
           qwen_api_key: '${{ secrets.QWEN_API_KEY }}'
-          qwen_cli_version: '${{ vars.QWEN_CLI_VERSION || "latest" }}'
+          qwen_cli_version: '${{ vars.QWEN_CLI_VERSION || ''latest'' }}'
           qwen_debug: '${{ fromJSON(vars.DEBUG || vars.ACTIONS_STEP_DEBUG || false) }}'
-          qwen_model: '${{ vars.QWEN_MODEL || "qwen3-coder-plus" }}'
-          qwen_base_url: '${{ vars.QWEN_BASE_URL || "https://dashscope.aliyuncs.com/compatible-mode/v1" }}'
+          qwen_model: '${{ vars.QWEN_MODEL || ''qwen3-coder-plus'' }}'
+          qwen_base_url: '${{ vars.QWEN_BASE_URL || ''https://dashscope.aliyuncs.com/compatible-mode/v1'' }}'
           settings: |-
             {
               "model": {
