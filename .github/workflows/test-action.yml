@@ -1,0 +1,50 @@
+name: Test Action Locally
+
+on:
+  workflow_dispatch:
+    inputs:
+      qwen_api_key:
+        description: 'Qwen API Key (可选，用于测试)'
+        required: false
+        type: string
+      prompt:
+        description: '测试提示词'
+        required: false
+        default: 'Hello, 这是一个测试。请简单回复。'
+        type: string
+      qwen_cli_version:
+        description: 'Qwen CLI 版本'
+        required: false
+        default: 'latest'
+        type: string
+      qwen_debug:
+        description: '启用调试模式'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Test Action
+        id: test_action
+        uses: ./
+        with:
+          qwen_api_key: ${{ inputs.qwen_api_key || secrets.QWEN_API_KEY || '' }}
+          prompt: ${{ inputs.prompt }}
+          qwen_cli_version: ${{ inputs.qwen_cli_version }}
+          qwen_debug: ${{ inputs.qwen_debug }}
+
+      - name: Display Output
+        run: |
+          echo "=== Action Output Summary ==="
+          echo "${{ steps.test_action.outputs.summary }}"
+          if [ -n "${{ steps.test_action.outputs.error }}" ]; then
+            echo "=== Action Error Output ==="
+            echo "${{ steps.test_action.outputs.error }}"
+          fi
+

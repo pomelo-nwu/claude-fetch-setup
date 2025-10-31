@@ -42,7 +42,7 @@ jobs:
 
       - name: 'Run Qwen Code CLI'
         id: 'run_qwen'
-        uses: './action.yml' # ratchet:exclude
+        uses: "../action.yml" # Local action reference
         env:
           TITLE: '${{ github.event.pull_request.title || github.event.issue.title }}'
           DESCRIPTION: '${{ github.event.pull_request.body || github.event.issue.body }}'
