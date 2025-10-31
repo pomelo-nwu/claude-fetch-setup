@@ -55,7 +55,7 @@ jobs:
         id: "qwen_analysis"
         if: |-
           ${{ steps.get_labels.outputs.available_labels != '' }}
-        uses: "../action.yml" # Local action reference
+        uses: "./" # Local action reference
         env:
           GITHUB_TOKEN: "" # Do NOT pass any auth tokens here since this runs on untrusted inputs
           ISSUE_TITLE: "${{ github.event.issue.title }}"
